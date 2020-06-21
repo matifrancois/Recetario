@@ -2,6 +2,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QFileDialog>
 #include <QGraphicsItem>
+#include <QLabel>
 #include <QTimer>  
 #include <QFutureWatcher>
 #include <qdir.h>
@@ -31,6 +32,8 @@ private:
     void VerReceta(void);
     void onSiguiente(void);
     void onAnterior(void);
+    void onBuscar(void);
+    vector<QLabel*> textos;
     Backend backend;
     int index;
     int idALeer;

@@ -100,6 +100,43 @@ bool Backend::getTodoOk(void)
     return TodoOk;
 }
 
+
+static int callback_nombre(void* nombres, int argc, char** argv, char** azColName) {
+    if (argv[0] != NULL)
+    {
+        for (int i = 0; i < argc; i++) {
+            (static_cast<vector<string>*>(nombres))->push_back(string(argv[i]));
+        }
+    }
+    else
+    {
+        printf("No hay elementos con costo menor al introducido \n");
+    }
+    return 0;
+}
+
+
+vector<string>  Backend::buscarPorCosto(string costo_a_buscar)
+{
+    nombres.clear();
+    string string_sql = "SELECT NOMBRE FROM  RECETARIO WHERE COSTO <= " + costo_a_buscar + ";";
+    sql = string_sql.c_str();
+
+    /* Execute SQL statement */
+    rc = sqlite3_exec(db, sql, callback_nombre, (void*)&nombres, &zErrMsg);
+
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+        sqlite3_free(zErrMsg);
+    }
+    else {
+        fprintf(stdout, "Operation done successfully\n");
+    }
+    return nombres;
+}
+
+
+
 static int callback_Receta(void* receta, int argc, char** argv, char** azColName) {
     if (argv[0] != NULL)
     {

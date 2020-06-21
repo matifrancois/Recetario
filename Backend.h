@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector> 
 #include "sqlite3.h" 
 
 using namespace std;
@@ -20,6 +21,8 @@ public:
 	bool getTodoOk(void);
 	Receta getReceta(int id);
 	int getID(void);
+	vector<string>buscarPorCosto(string costo_a_buscar);
+	vector<string> nombres;
 private:
 	int ID;
 	string Error;

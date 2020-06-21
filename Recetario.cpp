@@ -27,13 +27,6 @@ Recetario::Recetario(QWidget *parent)
             this->ui.buscarPor, &QPushButton::clicked,
             this, &Recetario::onBuscarPor
         );
-
-
-        //Botones para volver al menu principal
-        QObject::connect(
-            this->ui.volver3, &QPushButton::clicked,
-            this, &Recetario::onVolver
-        );
     }
 }
 
@@ -43,6 +36,7 @@ void Recetario::onNuevaReceta(void)
     this->ui.stackedWidget->setCurrentIndex(index);
     nuevaRecetaWindow();
 }
+
 
 void Recetario::onVerReceta(void)
 {
@@ -63,10 +57,39 @@ void Recetario::onVerReceta(void)
     );
 }
 
+void Recetario::onBuscar(void)
+{
+    for (auto& texto : textos)
+    {
+        delete texto;
+    }
+    textos.clear();
+    string costo_a_buscar = this->ui.buscar_por_costo->text().toStdString();
+    vector<string> Nombres = backend.buscarPorCosto(costo_a_buscar);
+    for (int i=0; i<Nombres.size();i++)
+    {
+        textos.push_back(new QLabel(ui.scrollAreaWidgetContents));
+        textos[i]->setGeometry(QRect(0, 50*i, 530, 50));
+        textos[i]->setText(QString::fromStdString(Nombres[i]));
+    }
+    for (auto& text : textos)
+    {
+        ui.verticalLayout->addWidget(text);
+    }
+}
+
 void Recetario::onBuscarPor(void)
 {
     index = 3;
     this->ui.stackedWidget->setCurrentIndex(index);
+    QObject::connect(
+        this->ui.volverBP, &QPushButton::clicked,
+        this, &Recetario::onVolver
+    );
+    QObject::connect(
+        this->ui.buscar, &QPushButton::clicked,
+        this, &Recetario::onBuscar
+    );
 }
 
 void Recetario::onVolver(void)
