@@ -4,6 +4,13 @@
 
 using namespace std;
 
+typedef struct Resetas {
+	char nombre[50];
+	string ingredientes;
+	string pasos;
+	float costo;
+} Receta;
+
 class Backend
 {
 public:
@@ -11,6 +18,8 @@ public:
 	~Backend();
 	void SetNuevaReceta(string Nombre, string Ingredientes, string Pasos, string Costo);
 	bool getTodoOk(void);
+	Receta getReceta(int id);
+	int getID(void);
 private:
 	int ID;
 	string Error;

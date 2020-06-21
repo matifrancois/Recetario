@@ -28,6 +28,10 @@ private:
     void onVolver(void);
     void nuevaRecetaWindow(void);
     void onAceptar(void);
+    void VerReceta(void);
+    void onSiguiente(void);
+    void onAnterior(void);
     Backend backend;
     int index;
+    int idALeer;
 };

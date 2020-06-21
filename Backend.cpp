@@ -8,7 +8,8 @@ static int callback_ID(void* ID, int argc, char** argv, char** azColName) {
     }
     else
     {
-        *(int*)ID = 0;
+        //ya que despues se suma 1 para llegar al 0 (primer caso)
+        *(int*)ID = -1; 
     }
     return 0;
 }
@@ -24,7 +25,7 @@ static int callback(void* NotUsed, int argc, char** argv, char** azColName) {
 
 Backend::Backend()
 {
-    ID = 0;
+    ID = -1;
     rc = sqlite3_open("BaseDeDatos.db", &db);
 
     if (rc) {
@@ -97,5 +98,46 @@ void Backend::SetNuevaReceta(string Nombre, string Ingredientes, string Pasos, s
 bool Backend::getTodoOk(void)
 {
     return TodoOk;
+}
+
+static int callback_Receta(void* receta, int argc, char** argv, char** azColName) {
+    if (argv[0] != NULL)
+    {
+        strcpy(((Receta*)receta)->nombre, argv[1]);
+        ((Receta*)receta)->ingredientes = argv[2];
+        ((Receta*)receta)->pasos = argv[3];
+        ((Receta*)receta)->costo = stof(argv[4]);
+    }
+    else
+    {
+        strcpy(((Receta*)receta)->nombre, "");
+        ((Receta*)receta)->ingredientes = "";
+        ((Receta*)receta)->pasos = "";
+        ((Receta*)receta)->costo = 0.0;
+    }
+    return 0;
+}
+
+Receta Backend::getReceta(int id)
+{
+    Receta receta;
+    string sql_string = "SELECT  * FROM  RECETARIO WHERE id =" + to_string(id) + ";";
+    sql = sql_string.c_str();
+    /* Execute SQL statement */
+    rc = sqlite3_exec(db, sql, callback_Receta, (void*)&receta, &zErrMsg);
+
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+        sqlite3_free(zErrMsg);
+    }
+    else {
+        fprintf(stdout, "Operation done successfully\n");
+    }
+    return receta;
+}
+
+int Backend::getID(void)
+{
+    return ID;
 }
 

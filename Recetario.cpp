@@ -10,6 +10,7 @@ Recetario::Recetario(QWidget *parent)
         ui.setupUi(this);
         ui.costo->setValidator(new QDoubleValidator());
         index = 0;
+        idALeer = 0;
         this->ui.stackedWidget->setCurrentIndex(index);
         QWidget::setWindowTitle("Recetario");
 
@@ -29,11 +30,6 @@ Recetario::Recetario(QWidget *parent)
 
 
         //Botones para volver al menu principal
-
-        QObject::connect(
-            this->ui.volver2, &QPushButton::clicked,
-            this, &Recetario::onVolver
-        );
         QObject::connect(
             this->ui.volver3, &QPushButton::clicked,
             this, &Recetario::onVolver
@@ -52,6 +48,19 @@ void Recetario::onVerReceta(void)
 {
     index = 2;
     this->ui.stackedWidget->setCurrentIndex(index);
+    VerReceta();
+    QObject::connect(
+        this->ui.volverVR, &QPushButton::clicked,
+        this, &Recetario::onVolver
+    );
+    QObject::connect(
+        this->ui.siguiente, &QPushButton::clicked,
+        this, &Recetario::onSiguiente
+    );
+    QObject::connect(
+        this->ui.anterior, &QPushButton::clicked,
+        this, &Recetario::onAnterior
+    );
 }
 
 void Recetario::onBuscarPor(void)
@@ -64,6 +73,20 @@ void Recetario::onVolver(void)
 {
     index = 0;
     this->ui.stackedWidget->setCurrentIndex(index);
+}
+
+void Recetario::onSiguiente(void)
+{
+    if(idALeer < backend.getID())
+        idALeer++;
+    VerReceta();
+}
+
+void Recetario::onAnterior(void)
+{
+    if(idALeer > 0)
+        idALeer--;
+    VerReceta();
 }
 
 void Recetario::nuevaRecetaWindow(void)
@@ -90,4 +113,13 @@ void Recetario::onAceptar(void)
     backend.SetNuevaReceta(Nombre, Ingredientes, Pasos, Costo);
     index = 0;
     this->ui.stackedWidget->setCurrentIndex(index);
+}
+
+void Recetario::VerReceta(void)
+{
+    Receta recetaAMostrar = backend.getReceta(idALeer);
+    this->ui.nombre_label->setText(QString::fromStdString(recetaAMostrar.nombre));
+    this->ui.costo_label->setText(QString::fromStdString(to_string(recetaAMostrar.costo)));
+    this->ui.ingredientes_label->setText(QString::fromStdString(recetaAMostrar.ingredientes));
+    this->ui.pasos_label->setText(QString::fromStdString(recetaAMostrar.pasos));
 }

@@ -48,20 +48,27 @@ public:
     QPushButton *crearReceta;
     QWidget *page_2;
     QGridLayout *gridLayout_3;
+    QLabel *label_6;
     QPushButton *aceptarNR;
+    QPlainTextEdit *pasos;
+    QLabel *label_7;
     QLabel *label_2;
     QLabel *label_3;
-    QLabel *label_6;
     QLabel *label_5;
     QLineEdit *costo;
-    QLabel *label_7;
     QPushButton *volverNR;
     QLineEdit *nombre;
     QPlainTextEdit *ingredientes;
-    QPlainTextEdit *pasos;
     QWidget *page_3;
-    QHBoxLayout *horizontalLayout_4;
-    QPushButton *volver2;
+    QGridLayout *gridLayout_4;
+    QSpacerItem *horizontalSpacer_5;
+    QPushButton *volverVR;
+    QLabel *pasos_label;
+    QPushButton *siguiente;
+    QPushButton *anterior;
+    QLabel *ingredientes_label;
+    QLabel *costo_label;
+    QLabel *nombre_label;
     QWidget *page_4;
     QHBoxLayout *horizontalLayout_5;
     QPushButton *volver3;
@@ -73,7 +80,7 @@ public:
     {
         if (RecetarioClass->objectName().isEmpty())
             RecetarioClass->setObjectName(QString::fromUtf8("RecetarioClass"));
-        RecetarioClass->resize(604, 393);
+        RecetarioClass->resize(581, 432);
         centralWidget = new QWidget(RecetarioClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         horizontalLayout = new QHBoxLayout(centralWidget);
@@ -148,10 +155,26 @@ public:
         gridLayout_3->setSpacing(6);
         gridLayout_3->setContentsMargins(11, 11, 11, 11);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        label_6 = new QLabel(page_2);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+
+        gridLayout_3->addWidget(label_6, 3, 0, 1, 1);
+
         aceptarNR = new QPushButton(page_2);
         aceptarNR->setObjectName(QString::fromUtf8("aceptarNR"));
 
         gridLayout_3->addWidget(aceptarNR, 5, 3, 1, 1);
+
+        pasos = new QPlainTextEdit(page_2);
+        pasos->setObjectName(QString::fromUtf8("pasos"));
+
+        gridLayout_3->addWidget(pasos, 3, 1, 1, 3);
+
+        label_7 = new QLabel(page_2);
+        label_7->setObjectName(QString::fromUtf8("label_7"));
+        label_7->setFont(font);
+
+        gridLayout_3->addWidget(label_7, 0, 1, 1, 1);
 
         label_2 = new QLabel(page_2);
         label_2->setObjectName(QString::fromUtf8("label_2"));
@@ -163,11 +186,6 @@ public:
 
         gridLayout_3->addWidget(label_3, 2, 0, 1, 1);
 
-        label_6 = new QLabel(page_2);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
-
-        gridLayout_3->addWidget(label_6, 3, 0, 1, 1);
-
         label_5 = new QLabel(page_2);
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
@@ -178,16 +196,10 @@ public:
 
         gridLayout_3->addWidget(costo, 4, 1, 1, 3);
 
-        label_7 = new QLabel(page_2);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
-        label_7->setFont(font);
-
-        gridLayout_3->addWidget(label_7, 0, 1, 1, 1);
-
         volverNR = new QPushButton(page_2);
         volverNR->setObjectName(QString::fromUtf8("volverNR"));
 
-        gridLayout_3->addWidget(volverNR, 5, 0, 1, 3);
+        gridLayout_3->addWidget(volverNR, 5, 1, 1, 2);
 
         nombre = new QLineEdit(page_2);
         nombre->setObjectName(QString::fromUtf8("nombre"));
@@ -199,22 +211,54 @@ public:
 
         gridLayout_3->addWidget(ingredientes, 2, 1, 1, 3);
 
-        pasos = new QPlainTextEdit(page_2);
-        pasos->setObjectName(QString::fromUtf8("pasos"));
-
-        gridLayout_3->addWidget(pasos, 3, 1, 1, 3);
-
         stackedWidget->addWidget(page_2);
         page_3 = new QWidget();
         page_3->setObjectName(QString::fromUtf8("page_3"));
-        horizontalLayout_4 = new QHBoxLayout(page_3);
-        horizontalLayout_4->setSpacing(6);
-        horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        volver2 = new QPushButton(page_3);
-        volver2->setObjectName(QString::fromUtf8("volver2"));
+        gridLayout_4 = new QGridLayout(page_3);
+        gridLayout_4->setSpacing(6);
+        gridLayout_4->setContentsMargins(11, 11, 11, 11);
+        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        horizontalLayout_4->addWidget(volver2);
+        gridLayout_4->addItem(horizontalSpacer_5, 4, 0, 1, 1);
+
+        volverVR = new QPushButton(page_3);
+        volverVR->setObjectName(QString::fromUtf8("volverVR"));
+
+        gridLayout_4->addWidget(volverVR, 4, 1, 1, 1);
+
+        pasos_label = new QLabel(page_3);
+        pasos_label->setObjectName(QString::fromUtf8("pasos_label"));
+
+        gridLayout_4->addWidget(pasos_label, 2, 0, 1, 4);
+
+        siguiente = new QPushButton(page_3);
+        siguiente->setObjectName(QString::fromUtf8("siguiente"));
+
+        gridLayout_4->addWidget(siguiente, 4, 3, 1, 1);
+
+        anterior = new QPushButton(page_3);
+        anterior->setObjectName(QString::fromUtf8("anterior"));
+
+        gridLayout_4->addWidget(anterior, 4, 2, 1, 1);
+
+        ingredientes_label = new QLabel(page_3);
+        ingredientes_label->setObjectName(QString::fromUtf8("ingredientes_label"));
+
+        gridLayout_4->addWidget(ingredientes_label, 1, 0, 1, 4);
+
+        costo_label = new QLabel(page_3);
+        costo_label->setObjectName(QString::fromUtf8("costo_label"));
+
+        gridLayout_4->addWidget(costo_label, 0, 2, 1, 2);
+
+        nombre_label = new QLabel(page_3);
+        nombre_label->setObjectName(QString::fromUtf8("nombre_label"));
+        QFont font1;
+        font1.setPointSize(12);
+        nombre_label->setFont(font1);
+
+        gridLayout_4->addWidget(nombre_label, 0, 0, 1, 2);
 
         stackedWidget->addWidget(page_3);
         page_4 = new QWidget();
@@ -235,7 +279,7 @@ public:
         RecetarioClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(RecetarioClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 604, 26));
+        menuBar->setGeometry(QRect(0, 0, 581, 26));
         RecetarioClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(RecetarioClass);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -246,7 +290,7 @@ public:
 
         retranslateUi(RecetarioClass);
 
-        stackedWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(RecetarioClass);
@@ -259,14 +303,20 @@ public:
         label->setText(QCoreApplication::translate("RecetarioClass", "RECETARIO", nullptr));
         verReceta->setText(QCoreApplication::translate("RecetarioClass", "Ver Recetas", nullptr));
         crearReceta->setText(QCoreApplication::translate("RecetarioClass", "Crear Receta", nullptr));
+        label_6->setText(QCoreApplication::translate("RecetarioClass", "Pasos", nullptr));
         aceptarNR->setText(QCoreApplication::translate("RecetarioClass", "Aceptar", nullptr));
+        label_7->setText(QCoreApplication::translate("RecetarioClass", "Nueva Receta", nullptr));
         label_2->setText(QCoreApplication::translate("RecetarioClass", "Nombre", nullptr));
         label_3->setText(QCoreApplication::translate("RecetarioClass", "Ingredientes", nullptr));
-        label_6->setText(QCoreApplication::translate("RecetarioClass", "Pasos", nullptr));
         label_5->setText(QCoreApplication::translate("RecetarioClass", "Costo", nullptr));
-        label_7->setText(QCoreApplication::translate("RecetarioClass", "Nueva Receta", nullptr));
         volverNR->setText(QCoreApplication::translate("RecetarioClass", "Volver", nullptr));
-        volver2->setText(QCoreApplication::translate("RecetarioClass", "Volver", nullptr));
+        volverVR->setText(QCoreApplication::translate("RecetarioClass", "Volver", nullptr));
+        pasos_label->setText(QCoreApplication::translate("RecetarioClass", "Pasos", nullptr));
+        siguiente->setText(QCoreApplication::translate("RecetarioClass", "Siguiente", nullptr));
+        anterior->setText(QCoreApplication::translate("RecetarioClass", "Anterior", nullptr));
+        ingredientes_label->setText(QCoreApplication::translate("RecetarioClass", "Ingredientes", nullptr));
+        costo_label->setText(QCoreApplication::translate("RecetarioClass", "Costo", nullptr));
+        nombre_label->setText(QCoreApplication::translate("RecetarioClass", "Nombre", nullptr));
         volver3->setText(QCoreApplication::translate("RecetarioClass", "Volver", nullptr));
     } // retranslateUi
 
