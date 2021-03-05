@@ -142,7 +142,7 @@ void Recetario::VerReceta(void)
 {
     Receta recetaAMostrar = backend.getReceta(idALeer);
     this->ui.nombre_label->setText(QString::fromStdString(recetaAMostrar.nombre));
-    this->ui.costo_label->setText(QString::fromStdString(to_string(recetaAMostrar.costo)));
+    this->ui.costo_label->setText(QString::fromStdString(to_string_with_precision(recetaAMostrar.costo,2)));
     this->ui.ingredientes_label->setText(QString::fromStdString(recetaAMostrar.ingredientes));
     this->ui.pasos_label->setText(QString::fromStdString(recetaAMostrar.pasos));
 }

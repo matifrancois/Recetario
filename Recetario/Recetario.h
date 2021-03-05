@@ -12,6 +12,9 @@
 #include <string.h>
 #include <QDoubleValidator>
 
+//to change precision
+#include <sstream>
+
 using namespace std;
 
 class Recetario : public QMainWindow
@@ -38,3 +41,14 @@ private:
     int index;
     int idALeer;
 };
+
+
+//this template is used to convert the float value to an string with the desiderable precision
+template <typename T>
+std::string to_string_with_precision(const T a_value, const int n = 6)
+{
+    std::ostringstream out;
+    out.precision(n);
+    out << std::fixed << a_value;
+    return out.str();
+}
