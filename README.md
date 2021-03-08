@@ -47,5 +47,5 @@ Dentro de propiedades en la pestaña "Qt Project Settings" seleccionar en Qt ins
 ## Vista previa
 
 
-![App Working](Demo/ExpensesApp.gif)
+![App Working](Gifs/recetario_esp.gif)
 
